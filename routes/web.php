@@ -2,14 +2,36 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\NoteController;
 
 Route::get("/", function () {
     return view("home");
 });
 
-Route::get("/notes", function () {
-    return view("notes.index");
-})->middleware('auth')->name('notes');
+/** Notes */
+Route::get("/notes", [NoteController::class, "index"])
+    ->middleware("auth")
+    ->name("notes");
+
+Route::get("notes/create", [NoteController::class, "create"])
+    ->middleware("auth")
+    ->name("notes.create");
+
+Route::post("/notes", [NoteController::class, "store"])
+    ->middleware("auth")
+    ->name("notes.store");
+
+Route::get("notes/{id}/edit", [NoteController::class, "edit"])
+    ->middleware("auth")
+    ->name("notes.edit");
+
+Route::put("/notes/{id}", [NoteController::class, "update"])
+    ->middleware("auth")
+    ->name("notes.update");
+
+Route::delete("/notes/{id}", [NoteController::class, "destroy"])
+    ->middleware("auth")
+    ->name("notes.destroy");
 
 /* Register */
 Route::get("/register", [AuthController::class, "showRegister"])->name(

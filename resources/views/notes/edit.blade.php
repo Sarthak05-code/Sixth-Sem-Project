@@ -69,6 +69,33 @@
                 required
             >{{ old('content', $note->content) }}</textarea>
         </div>
+        <div>
+            <label
+                for="tags"
+                class="block text-sm font-medium text-gray-700"
+            >
+                Tags
+            </label>
+        
+            <input
+                type="text"
+                name="tags"
+                id="tags"
+                value="{{ old('tags', $note->tags->pluck('name')->implode(', ')) }}"
+                placeholder="Laravel, PHP, Database"
+                class="mt-2 w-full rounded-lg border border-gray-300 px-4 py-3 text-sm focus:border-gray-500 focus:outline-none"
+            >
+        
+            <p class="mt-2 text-xs text-gray-500">
+                Separate multiple tags with commas.
+            </p>
+        
+            @error('tags')
+                <p class="mt-2 text-sm text-red-600">
+                    {{ $message }}
+                </p>
+            @enderror
+        </div>
 
         <div class="flex items-center gap-4">
 

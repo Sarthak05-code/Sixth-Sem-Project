@@ -26,14 +26,14 @@
             <div class="mt-8 flex justify-center gap-4">
 
                 <a
-                    href="#"
+                    href="{{ auth()->check() ? route('notes.create') : route('register') }}"
                     class="rounded-lg bg-gray-900 px-6 py-3 font-medium text-white hover:bg-gray-700"
                 >
                     Get Started
                 </a>
 
                 <a
-                    href="#"
+                    href="#features"
                     class="rounded-lg border border-gray-300 px-6 py-3 font-medium hover:bg-gray-50"
                 >
                     Learn More
@@ -47,7 +47,7 @@
 
 
     <!-- Features -->
-    <section class="border-t border-gray-200 bg-gray-50">
+    <section id="features" class="border-t border-gray-200 bg-gray-50">
 
         <div class="mx-auto max-w-7xl px-6 py-20">
 
@@ -148,7 +148,7 @@
             <div class="mt-8">
 
                 <a
-                    href="#"
+                    href="{{ auth()->check() ? route('notes.create') : route('register') }}"
                     class="inline-flex rounded-lg bg-gray-900 px-6 py-3 font-medium text-white hover:bg-gray-700"
                 >
                     Get Started

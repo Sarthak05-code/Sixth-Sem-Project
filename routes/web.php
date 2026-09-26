@@ -33,6 +33,14 @@ Route::delete("/notes/{id}", [NoteController::class, "destroy"])
     ->middleware("auth")
     ->name("notes.destroy");
 
+Route::put("/notes/{id}/archive", [NoteController::class, "archive"])
+    ->middleware("auth")
+    ->name("notes.archive");
+
+Route::put("/notes/{id}/unarchive", [NoteController::class, "unarchive"])
+    ->middleware("auth")
+    ->name("notes.unarchive");
+
 /* Register */
 Route::get("/register", [AuthController::class, "showRegister"])->name(
     "register",

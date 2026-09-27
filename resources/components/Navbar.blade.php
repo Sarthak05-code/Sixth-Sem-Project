@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,18 +5,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Laravel Home</title>
+    <title>Navbar Tester</title>
 </head>
 
 <body>
-    <x-navbar/>
-    <h1>Welcome to Larvel</h1>
-    <p>Hello, inside the php::laravel.</p>
-    <p>Today date : {{ date('Y-M-D') }}</p>
+    <nav class="flex flex-col justify-center font-semibold ">
+        <li>Home</li>
+        <li>Notes</li>
+        <li>Privacy</li>
+        <li>Repository</li>
+        <li>Archives</li>
+    </nav>
 </body>
 
 </html>
-
-
-
-

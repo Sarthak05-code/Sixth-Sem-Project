@@ -1,54 +1,158 @@
 <x-app-layout>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            Dashboard
         </h2>
     </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
+                <div class="p-6">
+
+                    {{-- Student Dashboard --}}
                     @if (auth()->user()->role === 'student')
                         <h3 class="text-2xl font-semibold">
-                            Welcome, Student
+                            Student Dashboard
                         </h3>
 
                         <p class="mt-2 text-gray-600">
-                            You are logged in as a student.
+                            Welcome, {{ auth()->user()->name }}.
                         </p>
+
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">Resources</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    Browse educational resources.
+                                </p>
+                            </div>
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">Discussions</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    Participate in educational discussions.
+                                </p>
+                            </div>
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">Events</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    View educational events and announcements.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        {{-- Teacher Dashboard --}}
                     @elseif (auth()->user()->role === 'teacher')
                         <h3 class="text-2xl font-semibold">
-                            Welcome, Teacher
+                            Teacher Dashboard
                         </h3>
 
                         <p class="mt-2 text-gray-600">
-                            You are logged in as a Teacher
+                            Welcome, {{ auth()->user()->name }}.
                         </p>
+
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">Resources</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    Share and manage educational resources.
+                                </p>
+                            </div>
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">Discussions</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    Participate in educational discussions.
+                                </p>
+                            </div>
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">Events</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    View and share educational events.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        {{-- Parent Dashboard --}}
                     @elseif (auth()->user()->role === 'parent')
                         <h3 class="text-2xl font-semibold">
-                            Welcome, Parent
+                            Parent Dashboard
                         </h3>
 
                         <p class="mt-2 text-gray-600">
-                            You are logged in as a Parent.
+                            Welcome, {{ auth()->user()->name }}.
                         </p>
+
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">My Students</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    Manage your student connections.
+                                </p>
+                            </div>
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">Events</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    View relevant educational events and announcements.
+                                </p>
+                            </div>
+
+                        </div>
+
+
+                        {{-- Admin Dashboard --}}
                     @elseif (auth()->user()->role === 'admin')
                         <h3 class="text-2xl font-semibold">
-                            You are the Admin
+                            Admin Dashboard
                         </h3>
+
                         <p class="mt-2 text-gray-600">
-                            You are here as the admin.
+                            Welcome, {{ auth()->user()->name }}.
                         </p>
+
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+
+                            <a href="{{ route('institutions.index') }}" class="border rounded-lg p-4 hover:bg-gray-50">
+                                <h4 class="font-semibold">Institutions</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    Manage educational institutions.
+                                </p>
+                            </a>
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">Users</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    Manage platform users.
+                                </p>
+                            </div>
+
+                            <div class="border rounded-lg p-4">
+                                <h4 class="font-semibold">Reports</h4>
+                                <p class="mt-1 text-sm text-gray-600">
+                                    Review reported content.
+                                </p>
+                            </div>
+
+                        </div>
                     @endif
-
-                    <a href="{{ route('home') }}" class="inline-block mt-4 text-blue-600 hover:text-blue-800 underline">
-                        Go to Home.
-                    </a>
-
 
                 </div>
             </div>
+
         </div>
     </div>
+
 </x-app-layout>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\User;
+use App\Models\Institution;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -10,10 +11,23 @@ use Livewire\Volt\Component;
 
 new #[Layout('layouts.guest')] class extends Component {
     public string $name = '';
+
     public string $email = '';
+
     public string $password = '';
+
     public string $password_confirmation = '';
+
     public string $role = 'student';
+
+    public ?int $institution_id = null;
+
+    public $institutions = [];
+
+    public function mount(): void
+    {
+        $this->institutions = Institution::orderBy('name')->get();
+    }
 
     /**
      * Handle an incoming registration request.
@@ -25,6 +39,7 @@ new #[Layout('layouts.guest')] class extends Component {
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:' . User::class],
             'password' => ['required', 'string', 'confirmed', Rules\Password::defaults()],
             'role' => ['required', 'in:student,teacher,parent'],
+            'institution_id' => ['nullable', 'exists:institutions,id'],
         ]);
 
         $validated['password'] = Hash::make($validated['password']);
@@ -68,6 +83,24 @@ new #[Layout('layouts.guest')] class extends Component {
             </select>
 
             <x-input-error :messages="$errors->get('role')" class="mt-2" />
+        </div>
+
+        <!-- Institution -->
+        <div class="mt-4">
+            <x-input-label for="institution_id" :value="__('Institution')" />
+
+            <select wire:model="institution_id" id="institution_id" name="institution_id"
+                class="block mt-1 w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500">
+                <option value="">Select Institution</option>
+
+                @foreach ($institutions as $institution)
+                    <option value="{{ $institution->id }}">
+                        {{ $institution->name }}
+                    </option>
+                @endforeach
+            </select>
+
+            <x-input-error :messages="$errors->get('institution_id')" class="mt-2" />
         </div>
 
         <!-- Password -->

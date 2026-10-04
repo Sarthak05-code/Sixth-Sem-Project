@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\InstitutionController;
+use App\Http\Controllers\ResourceController;
 
 Route::get('/' , function() {
     return view('index');
@@ -20,5 +21,16 @@ Route::middleware(['auth' , 'role:admin'])->group(function() {
 
     Route::post('/institutions' , [InstitutionController::class, 'store'])->name('institutions.store');
 });
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/resources', [ResourceController::class, 'index'])
+        ->name('resources.index');
+
+    Route::post('/resources', [ResourceController::class, 'store'])
+        ->name('resources.store');
+
+});
+
 
 require __DIR__.'/auth.php';

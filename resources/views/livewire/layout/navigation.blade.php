@@ -34,6 +34,10 @@ new class extends Component {
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
+                    <x-nav-link :href="route('resources.index')" :active="request()->routeIs('resources.*')" wire:navigate>
+                        {{ __('Resources') }}
+                    </x-nav-link>
+
                     @if (auth()->user()->role === 'admin')
                         <x-nav-link :href="route('institutions.index')" :active="request()->routeIs('institutions.*')" wire:navigate>
                             {{ __('Institutions') }}
@@ -100,6 +104,9 @@ new class extends Component {
 
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')" wire:navigate>
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('resources.index')" :active="request()->routeIs('resources.*')" wire:navigate>
+                {{ __('Resources') }}
             </x-responsive-nav-link>
 
             @if (auth()->user()->role === 'admin')

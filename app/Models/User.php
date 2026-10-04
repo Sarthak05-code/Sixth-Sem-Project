@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Institution;
+use App\Models\Resource;
 
 class User extends Authenticatable
 {
@@ -52,5 +53,9 @@ class User extends Authenticatable
 
     public function institution() {
         return $this->belongsTo(Institution::class);
+    }
+
+    public function resource() {
+        return $this->hasMany(Resource::class);
     }
 }
